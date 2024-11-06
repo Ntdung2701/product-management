@@ -1,0 +1,22 @@
+extends ../../layouts/default.pug
+include ../../mixins/box-head.pug
+
+block main
+    .container.my-3
+        .row.justify-content-center
+            .col-8.col-md-6.text-center
+                +box-head("Thông tin tài khoản")
+
+                if (user.fullName)
+                    p Họ tên: <b>#{user.fullName}</b>
+
+                if (user.email)
+                    p Email: <b>#{user.email}</b>
+
+                p 
+                    span Trạng thái: 
+                    span <b>#{user.status === "active" ? "Hoạt động" : "Dừng hoạt động"}</b>
+
+                a.btn.btn-primary.mt-3(
+                    href=`/user/info/edit`
+                ) Chỉnh sửa thông tin

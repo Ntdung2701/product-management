@@ -1,0 +1,58 @@
+extends ../../layouts/default.pug
+include ../../mixins/box-head.pug
+
+block main
+    .container.my-3
+        .row.justify-content-center
+            .col-8.col-md-6.text-center
+                +box-head("Chỉnh sửa thông tin")
+                form(
+                action= `/user/info//edit/${data.id}?_method=PATCH`
+                method="POST"
+                enctype="multipart/form-data"
+            )
+                div(class="form-group")
+                    label(for="fullName") Họ tên *
+                    input(
+                        type="text"
+                        class="form-control"
+                        id="fullName"
+                        name="fullName"
+                        required
+                        value=data.fullName
+                    )
+                div(class="form-group")
+                    label(for="email") Email *
+                    input(
+                        type="email"
+                        class="form-control"
+                        id="email"
+                        name="email"
+                        required
+                        value=data.email
+                    )
+                div(class="form-group form-check form-check-inline")
+                    input(
+                        type="radio"
+                        class="form-check-input"
+                        id="statusActive"
+                        name="status"
+                        value="active"
+                        checked=(data.status === "active" ? true : false)
+                    )
+                    label(for="statusActive" class="form-check-label") Hoạt động
+                div(class="form-group form-check form-check-inline")
+                    input(
+                        type="radio"
+                        class="form-check-input"
+                        id="statusInActive"
+                        name="status"
+                        value="inactive"
+                        checked=(data.status === "inactive" ? true : false)
+                    )
+                    label(for="statusInActive" class="form-check-label") Dừng hoạt động
+                div(class="form-group")
+                    button(
+                        type="submit"
+                        class="btn btn-primary"
+                    ) Cập nhật
